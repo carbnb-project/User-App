@@ -1,0 +1,93 @@
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, CreditCard, Plus, ArrowRight, Trash2 } from 'lucide-react';
+import { Button } from '../components/ui/button';
+
+export function PaymentMethodsScreen() {
+    const navigate = useNavigate();
+
+    const paymentMethods = [
+        {
+            id: '1',
+            type: 'card',
+            brand: 'Visa',
+            last4: '4242',
+            expiry: '12/26',
+            isDefault: true,
+        },
+        {
+            id: '2',
+            type: 'card',
+            brand: 'Mastercard',
+            last4: '8888',
+            expiry: '09/25',
+            isDefault: false,
+        },
+    ];
+
+    return (
+        <div className="min-h-screen bg-gray-50 pb-32 font-sans text-brand flex flex-col">
+            {/* Header */}
+            <div className="bg-gray-50 flex items-center px-6 pt-safe-top pb-4 sticky top-0 z-10">
+                <button
+                    onClick={() => navigate(-1)}
+                    className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm active:scale-95 transition-transform"
+                >
+                    <ArrowLeft className="w-5 h-5 text-brand" />
+                </button>
+                <div className="flex-1 text-center mr-10">
+                    <span className="text-xl font-bold text-brand">Payment Methods</span>
+                </div>
+            </div>
+
+            <div className="px-6 space-y-6 flex-1">
+                <div className="space-y-4">
+                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-widest ml-1">Saved Methods</h3>
+
+                    {paymentMethods.map((method) => (
+                        <div key={method.id} className="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm border border-transparent hover:border-brand/5 transition-all">
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center">
+                                    <CreditCard className="w-6 h-6 text-brand" />
+                                </div>
+                                <div>
+                                    <div className="flex items-center gap-2">
+                                        <p className="font-bold text-brand">{method.brand} •••• {method.last4}</p>
+                                        {method.isDefault && (
+                                            <span className="bg-emerald-50 text-emerald-600 text-[10px] font-black uppercase px-2 py-0.5 rounded tracking-tighter">Default</span>
+                                        )}
+                                    </div>
+                                    <p className="text-xs text-gray-400 font-medium">Expires {method.expiry}</p>
+                                </div>
+                            </div>
+                            <button className="text-gray-300 hover:text-red-500 transition-colors">
+                                <Trash2 className="w-5 h-5" />
+                            </button>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="space-y-4">
+                    <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-widest ml-1">Other Options</h3>
+                    <button className="w-full bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm active:scale-[0.98] transition-all group">
+                        <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 bg-emerald-50 rounded-full flex items-center justify-center">
+                                <Plus className="w-5 h-5 text-emerald-600" />
+                            </div>
+                            <span className="font-bold text-brand text-sm">Add New Card</span>
+                        </div>
+                        <ArrowRight className="w-4 h-4 text-gray-300 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                </div>
+            </div>
+
+            <div className="p-6">
+                <Button
+                    onClick={() => navigate(-1)}
+                    className="w-full bg-brand hover:brightness-90 text-white h-14 rounded-2xl text-base font-bold shadow-md active:scale-[0.98] transition-all"
+                >
+                    Save Changes
+                </Button>
+            </div>
+        </div>
+    );
+}

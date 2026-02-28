@@ -1,0 +1,14 @@
+@import 'tailwindcss' source(none);
+@source '../**/*.{js,ts,jsx,tsx}';
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --color-brand: #101623;
+  --color-brand-light: #1a2035;
+  --color-background: #F1F4F9;
+  --color-surface: #ffffff;
+  --color-star: #F5A623;
+  --color-danger: #FF3B30;
+}
+
+@import 'tw-animate-css';
